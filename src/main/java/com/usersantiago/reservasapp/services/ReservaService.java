@@ -3,6 +3,7 @@ package com.usersantiago.reservasapp.services;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -33,4 +34,9 @@ public class ReservaService {
     reservaDAO.confirmarReserva(idReserva, reserva);
   }
 
+  public void updateReserva(String idRes, Reservas reserva) {
+    reservaDAO.updateReserva(idRes, reserva);
+  }
+
+  
 }

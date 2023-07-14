@@ -3,6 +3,8 @@ package com.usersantiago.reservasapp.controllers;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.usersantiago.reservasapp.models.Reservas;
@@ -35,10 +37,19 @@ public class ReservaController {
     return "ok";
   }
   
-  @PutMapping("actualizar")
-  public String confirmarReserva(@RequestParam("id") String idReserva, @RequestBody Reservas reserva) {
+  @PutMapping("confirmar-reserva")
+  public ResponseEntity<String> confirmarReserva(@RequestParam("id") String idReserva, @RequestBody Reservas reserva) {
     this.reservaService.confirmarReserva(idReserva, reserva);
-    return "ok";    
+    String responseBody = "OK";
+    return ResponseEntity.status(HttpStatus.OK)
+        .header("Content-Type","application/json")
+        .body(responseBody);
+  }
+  
+  @PutMapping("update-reserva")
+  public String updateReserva(@RequestParam("id") String idRes, @RequestBody Reservas reserva) {
+    this.reservaService.updateReserva(idRes, reserva);
+    return "ok";
   }
 
 }

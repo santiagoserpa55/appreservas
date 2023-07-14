@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.usersantiago.reservasapp.models.Reservas;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -55,13 +56,20 @@ public class ReservasDAO {
     }, keyHolder);
   }
 
-  public void confirmarReserva(String idReserva, Reservas reserva) {
-
+  public void updateReserva(String idReserva, Reservas reserva) {
     String sql = "UPDATE reservas SET fecha_reserva = ?, tipo_reserva = ?, cantidad_personas = ?,"
-        + "estado = ?, observaciones = ? WHERE id_reserva = ?";
+        + "observaciones = ? WHERE id_reserva = ?";
     jdbcTemplate.update(sql, reserva.getFechaReserva(), reserva.getTipoReserva(), reserva.getCantidadPersonas(),
-        reserva.getEstado(), reserva.getObservaciones(), idReserva);
-
+        reserva.getObservaciones(), idReserva);
   }
+
+  public int confirmarReserva(String idReserva, Reservas reserva) {
+    String sql = "UPDATE reservas SET estado = ? WHERE id_reserva = ?";
+   return jdbcTemplate.update(sql, reserva.getEstado(), idReserva);
+  }
+
+
+
+
 
 }

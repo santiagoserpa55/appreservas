@@ -45,5 +45,11 @@ public class UsuarioController {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
   }
+  
+  @PutMapping("update-user")
+  public String updateUser(@RequestParam("id") String idUser, @RequestBody Usuarios user) {
+    this.usuarioService.updateUser(idUser, user);
+    return "ok";
+  }
 
 }

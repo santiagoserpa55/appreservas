@@ -36,5 +36,10 @@ public class UsuarioService implements UsuarioRepository {
     }
     return false; // Autenticación fallida
   }
+  
+
+  public void updateUser(String idUser, Usuarios user) {
+    userDAO.updateUser(idUser, user);    
+  }
 
 }

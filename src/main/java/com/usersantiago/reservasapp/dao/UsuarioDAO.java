@@ -22,6 +22,8 @@ public class UsuarioDAO {
   private static final String SELECT_QUERY_SQL = "SELECT * FROM usuarios";
   private static final String INSERT_QUERY_SQL = "INSERT INTO usuarios (id_usuario, nombres, apellidos, "
       + "tipo_documento, identificacion, email, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  private static final String QUERY_UPDATE_USER = "UPDATE `usuarios` SET `nombres` = ?, `apellidos`"
+      + "= ? WHERE `usuarios`.`id_usuario` = ?;";
 
   UsuarioDAO(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
@@ -72,6 +74,10 @@ public class UsuarioDAO {
       return admin;
     });
   }
+  
 
-
+  public void updateUser(String idUser, Usuarios user) {
+    jdbcTemplate.update(QUERY_UPDATE_USER, user.getNombres(), user.getApellidos(), idUser);
+  }
+  
 }
